@@ -48,19 +48,21 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-  services:
   tests:
     build: ./tests
-    command: >
-      sh -c "killall Xvfb || true &&
-            Xvfb :99 -ac -screen 0 1920x1080x24 &
-            export DISPLAY=:99 &&
-            robot Slideshow.robot &&
-            killall Xvfb || true"
     depends_on:
       - front-end
-    networks:
-      - portfolio-network
+      - back-end
+      - db
+    environment:
+      - BROWSER=headlessfirefox
+      - HOST=http://front-end:3000
+    command: >
+      sh -c "while ! curl -s http://front-end:3000 > /dev/null; do sleep 1; done &&
+             Xvfb :99 -screen 0 1920x1080x24 & 
+             export DISPLAY=:99 && 
+             robot Slideshow.robot && 
+             pkill Xvfb"
 
 volumes:
   mysql_data:
