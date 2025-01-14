@@ -50,6 +50,9 @@ services:
       retries: 5
   tests:
     build: ./tests
+    volumes:
+      - ./tests:/app/tests
+      - ./logs:/app/logs
     depends_on:
       - front-end
       - back-end
@@ -59,9 +62,10 @@ services:
       - HOST=http://front-end:3000
     command: >
       sh -c "while ! curl -s http://front-end:3000 > /dev/null; do sleep 1; done &&
-             Xvfb :99 -screen 0 1920x1080x24 & 
-             export DISPLAY=:99 && 
-             robot Slideshow.robot && 
+             rm -f /tmp/.X99-lock &&
+             Xvfb :99 -screen 0 1920x1080x24 &
+             sleep 10 && 
+             robot --outputdir /app/logs Slideshow.robot && 
              pkill Xvfb"
 
 volumes:
