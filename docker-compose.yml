@@ -57,9 +57,11 @@ services:
       - front-end
       - back-end
       - db
+    env_file: .env
     environment:
       - BROWSER=headlessfirefox
       - HOST=http://front-end:3000
+      - BROWSER_OPENING=${BROWSER_OPENING}
     command: >
       sh -c "while ! curl -s http://front-end:3000 > /dev/null; do sleep 1; done &&
              rm -f /tmp/.X99-lock &&
