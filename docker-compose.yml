@@ -2,7 +2,10 @@ version: '3.8'
 
 services:
   front-end:
-    build: ./front-end
+    #Uncomment the following line to build the image from the Dockerfile in the front-end directory
+    #build: ./front-end
+    #Comment the following line if you uncomment the previous line
+    image: woudisnakes/portfolio-2023-front:latest
     command: npm start
     ports:
       - 3000:3000
@@ -11,7 +14,10 @@ services:
       - ./front-end/node_modules:/usr/src/app/node_modules
     container_name: front-end
   back-end:
-    build: ./portfolio-server
+    #Uncomment the following line to build the image from the Dockerfile in the portfolio-server directory
+    #build: ./portfolio-server
+    #Comment the following line if you uncomment the previous line
+    image: woudisnakes/portfolio-2023-back:latest
     command: npm start
     ports:
       - 3001:3001
@@ -49,7 +55,10 @@ services:
       timeout: 5s
       retries: 5
   tests:
-    build: ./tests
+    #Comment the following line if you uncomment the next line
+    image: woudisnakes/portfolio-2023-tests:latest
+    #Uncomment the following line to build the image from the Dockerfile in the tests directory
+    #build: ./tests
     volumes:
       - ./tests:/app/tests
       - ./logs:/app/logs
