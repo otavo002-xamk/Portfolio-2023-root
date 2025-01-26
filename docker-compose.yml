@@ -13,6 +13,8 @@ services:
       - ./front-end:/usr/src/app
       - ./front-end/node_modules:/usr/src/app/node_modules
     container_name: front-end
+    environment:
+      - REACT_APP_DBURL=http://back-end:3001
   back-end:
     #Uncomment the following line to build the image from the Dockerfile in the portfolio-server directory
     #build: ./portfolio-server
@@ -27,7 +29,7 @@ services:
     env_file: .env
     environment:
       - PORT=${PORT}
-      - HOST=${HOST}
+      - HOST=${DBHOST}
       - DBUSER=${DBUSER}
       - PASSWORD=${PASSWORD}
       - DATABASE=${DATABASE}
