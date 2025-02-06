@@ -3,9 +3,10 @@ I made this so you can run my Portfolio 2023 front-end, back-end and tests in co
 - Clone this repository to your local machine.
 
 - Then clone to the root directory of this repository the front-end, back-end and tests repositories:
-  portfolio-2023
-  portfolio-server
-  portfolio-2023-RF-tests
+
+  - portfolio-2023
+  - portfolio-server
+  - portfolio-2023-RF-tests
 
 - Create a new file named 'initdb.d/init.sql' also to the root directory. This is the file you should write your SQL initialization script.
 
