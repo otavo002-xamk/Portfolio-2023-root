@@ -1,17 +1,17 @@
-version: '3.8'
+version: "3.8"
 
 services:
   front-end:
     #Uncomment the following line to build the image from the Dockerfile in the front-end directory
-    #build: ./front-end
+    #build: ./portfolio-2023
     #Comment the following line if you uncomment the previous line
     image: woudisnakes/portfolio-2023-front:latest
     command: npm start
     ports:
       - 3000:3000
     volumes:
-      - ./front-end:/usr/src/app
-      - ./front-end/node_modules:/usr/src/app/node_modules
+      - ./portfolio-2023:/usr/src/app
+      - ./portfolio-2023/node_modules:/usr/src/app/node_modules
     container_name: front-end
     environment:
       - REACT_APP_DBURL=http://back-end:3001
@@ -29,13 +29,12 @@ services:
     env_file: .env
     environment:
       - PORT=${PORT}
-      - HOST=${DBHOST}
+      - HOST=db
       - DBUSER=${DBUSER}
       - PASSWORD=${PASSWORD}
       - DATABASE=${DATABASE}
       - DBPORT=${DBPORT}
       - DB_RANDOM_TABLE_NAME=${DB_RANDOM_TABLE_NAME}
-      - DB_RANDOM_TABLE_NAME_JSON_FILE=${DB_RANDOM_TABLE_NAME_JSON_FILE}
       - FRONT_END_URL=${FRONT_END_URL}
     depends_on:
       - db
@@ -52,7 +51,7 @@ services:
       - mysql_data:/var/lib/mysql
       - ./initdb.d/init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
-      test: ['CMD-SHELL', 'mysqladmin ping -u root']
+      test: ["CMD-SHELL", "mysqladmin ping -u root"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -60,9 +59,9 @@ services:
     #Comment the following line if you uncomment the next line
     image: woudisnakes/portfolio-2023-tests:latest
     #Uncomment the following line to build the image from the Dockerfile in the tests directory
-    #build: ./tests
+    #build: ./Portfolio-2023-RF-Tests
     volumes:
-      - ./tests:/app/tests
+      - ./Portfolio-2023-RF-Tests:/app/tests
       - ./logs:/app/logs
     depends_on:
       - front-end

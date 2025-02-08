@@ -10,6 +10,10 @@ I made this so you can run my Portfolio 2023 front-end, back-end and tests in co
 
 - Create a new file named 'initdb.d/init.sql' also to the root directory. This is the file you should write your SQL initialization script.
 
+- Read the docker-compose.yml file in this directory and README.md files of each repository under this directory and create the environment variables that are needed to the .env files. Also create other files that are needed.
+
+- Run 'npm install' command to install dependencies.
+
 If you want to build the images locally, then you have to comment out the image-line from each service in the docker-compose file and also uncomment the build-line. Use the command 'docker-compose up' to create the containers.
 
 Copyright 2025 Tapani Voutilainen
