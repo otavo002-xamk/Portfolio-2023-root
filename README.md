@@ -10,7 +10,22 @@ I made this so you can run my Portfolio 2023 front-end, back-end and tests in co
 
 - Create a new file named 'initdb.d/init.sql' also to the root directory. This is the file you should write your SQL initialization script.
 
-- Read the docker-compose.yml file in this directory and README.md files of each repository under this directory and create the environment variables that are needed to the .env files. Also create other files that are needed.
+- Create a .env file to the root directory and add the following fields to it. Replace the example values with real values:
+
+  REACT_APP_NASA_API_TOKEN=[your nasa_api token]
+  MYSQL_ROOT_PASSWORD=root
+  DATABASE=classicmodels
+  PORT=3001
+  DBUSER=node_client
+  PASSWORD=1234
+  DBPORT=3306
+  DB_RANDOM_TABLE_NAME=customers
+  DB_RANDOM_TABLE_NAME_JSON_FILE=table-content
+  FRONT_END_URL=http://localhost:3000
+  MYSQL_ROOT_PASSWORD=root
+  BROWSER_OPENING=small-width_opening
+  EMPTY_TABLE=empty_table
+  FILLED_TABLE=customers
 
 - Run 'npm install' command to install dependencies.
 
