@@ -22,7 +22,6 @@ I made this so you can run my Portfolio 2023 front-end, back-end and tests in co
   DB_RANDOM_TABLE_NAME=customers  
   DB_RANDOM_TABLE_NAME_JSON_FILE=table-content  
   FRONT_END_URL=http://localhost:3000  
-  MYSQL_ROOT_PASSWORD=root  
   BROWSER_OPENING=small-width_opening  
   EMPTY_TABLE=empty_table  
   FILLED_TABLE=customers
