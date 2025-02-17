@@ -32,11 +32,13 @@ services:
       - PORT=${PORT}
       - HOST=db
       - DBUSER=${DBUSER}
-      - PASSWORD=${PASSWORD}
       - DATABASE=${DATABASE}
       - DBPORT=${DBPORT}
       - DB_RANDOM_TABLE_NAME=${DB_RANDOM_TABLE_NAME}
       - FRONT_END_URL=${FRONT_END_URL}
+      - PASSWORD_FILE=/run/secrets/password
+    secrets:
+      - password
     depends_on:
       - db
   db:
@@ -45,7 +47,7 @@ services:
     container_name: db
     env_file: .env
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/mysql_root_password
       - MYSQL_DATABASE=${DATABASE}
       - MYSQL_INIT_SCRIPTS=/docker-entrypoint-initdb.d/init.sql
     volumes:
@@ -56,6 +58,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    secrets:
+      - mysql_root_password
   tests:
     #Comment the following line if you uncomment the next line
     image: woudisnakes/portfolio-2023-tests:latest
@@ -86,3 +90,9 @@ services:
 volumes:
   mysql_data:
   node_modules:
+
+secrets:
+  password:
+    file: password.txt
+  mysql_root_password:
+    file: mysql_root_password.txt
