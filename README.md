@@ -13,11 +13,9 @@ I made this so you can run my Portfolio 2023 front-end, back-end and tests in co
 - Create a .env file to the root directory and add the following fields to it. Replace the example values with real values:
 
   REACT_APP_NASA_API_TOKEN=[your nasa_api token]  
-  MYSQL_ROOT_PASSWORD=root  
   DATABASE=classicmodels  
   PORT=3001  
   DBUSER=node_client  
-  PASSWORD=1234  
   DBPORT=3306  
   DB_RANDOM_TABLE_NAME=customers  
   DB_RANDOM_TABLE_NAME_JSON_FILE=table-content  
@@ -25,8 +23,12 @@ I made this so you can run my Portfolio 2023 front-end, back-end and tests in co
   BROWSER_OPENING=small-width_opening  
   EMPTY_TABLE=empty_table  
   FILLED_TABLE=customers
+    
+- Create a file 'mysql_root_password.txt' to the root directory. Write to this file only the root password to the mysql database.
 
-- Run 'npm install' command to install dependencies.
+- Create a file 'password.txt' also to the root directory. Write to this file only the password for the DBUSER.
+
+- Navigate to front-end and back-end directories and then run 'npm install' command to install dependencies to them.
 
 If you want to build the images locally, then you have to comment out the image-line from each service in the docker-compose file and also uncomment the build-line. Use the command 'docker-compose up' to create the containers.
 
