@@ -53,6 +53,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
       - ./initdb.d/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf
     healthcheck:
       test: ["CMD-SHELL", "mysqladmin ping -u root"]
       interval: 10s
@@ -68,6 +69,7 @@ services:
     volumes:
       - ./Portfolio-2023-RF-Tests:/app/tests
       - ./logs:/app/logs
+      - ./Portfolio-2023-RF-Tests/Portfolio-2023-RPA-tests/jsonfiles:/app/jsonfiles
     depends_on:
       - front-end
       - back-end
