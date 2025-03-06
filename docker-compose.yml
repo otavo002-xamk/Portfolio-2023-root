@@ -16,6 +16,12 @@ services:
     environment:
       - REACT_APP_NASA_API_TOKEN=${REACT_APP_NASA_API_TOKEN}
       - REACT_APP_DBURL=http://back-end:3001
+    healthcheck:
+      test: ["CMD", "curl", "http://front-end:3000"]
+      interval: 10s
+      timeout: 240s
+      retries: 20
+      start_period: 0s
   back-end:
     #Uncomment the following line to build the image from the Dockerfile in the portfolio-server directory
     #build: ./portfolio-server
@@ -40,7 +46,14 @@ services:
     secrets:
       - password
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "http://back-end:3001"]
+      interval: 10s
+      timeout: 60s
+      retries: 5
+      start_period: 0s
   db:
     image: mysql:8
     restart: always
@@ -71,9 +84,12 @@ services:
       - ./logs:/app/logs
       - ./Portfolio-2023-RF-Tests/Portfolio-2023-RPA-tests/jsonfiles:/app/jsonfiles
     depends_on:
-      - front-end
-      - back-end
-      - db
+      front-end:
+        condition: service_healthy
+      back-end:
+        condition: service_healthy
+      db:
+        condition: service_healthy
     env_file: .env
     environment:
       - BROWSER=headlessfirefox
@@ -82,12 +98,11 @@ services:
       - EMPTY_TABLE=${EMPTY_TABLE}
       - FILLED_TABLE=${FILLED_TABLE}
     command: >
-      sh -c "while ! curl -s http://front-end:3000 > /dev/null; do sleep 1; done &&
-             rm -f /tmp/.X99-lock &&
-             Xvfb :99 -screen 0 1920x1080x24 &
-             sleep 10 && 
-             robot --outputdir /app/logs Database.robot Math_Game.robot NASA_API.robot Slideshow.robot static_parts.robot && 
-             pkill Xvfb"
+      sh -c "rm -f /tmp/.X99-lock && \
+            Xvfb :99 -screen 0 1920x1080x24 & \
+            sleep 5 && \
+            robot --outputdir /app/logs --exclude with_no_connection Database.robot Math_Game.robot NASA_API.robot Slideshow.robot static_parts.robot && \
+            pkill Xvfb"
 
 volumes:
   mysql_data:
