@@ -63,6 +63,8 @@ services:
       - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/mysql_root_password
       - MYSQL_DATABASE=${DATABASE}
       - MYSQL_INIT_SCRIPTS=/docker-entrypoint-initdb.d/init.sql
+      - MYSQL_USER=${DBUSER}
+      - MYSQL_PASSWORD_FILE=/run/secrets/password
     volumes:
       - mysql_data:/var/lib/mysql
       - ./initdb.d/init.sql:/docker-entrypoint-initdb.d/init.sql
@@ -74,6 +76,7 @@ services:
       retries: 5
     secrets:
       - mysql_root_password
+      - password
   tests:
     #Comment the following line if you uncomment the next line
     image: woudisnakes/portfolio-2023-tests:latest
