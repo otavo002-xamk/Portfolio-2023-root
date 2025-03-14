@@ -41,6 +41,7 @@ services:
       - DATABASE=${DATABASE}
       - DBPORT=${DBPORT}
       - DB_RANDOM_TABLE_NAME=${DB_RANDOM_TABLE_NAME}
+      - DB_RANDOM_TABLE_NAME_JSON_FILE=${DB_RANDOM_TABLE_NAME_JSON_FILE}
       - FRONT_END_URL=${FRONT_END_URL}
       - PASSWORD_FILE=/run/secrets/password
     secrets:
