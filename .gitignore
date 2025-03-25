@@ -4,5 +4,4 @@
 /portfolio-server
 /tests
 /logs
-password.txt
-mysql_root_password.txt
+*.txt
