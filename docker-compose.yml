@@ -15,7 +15,7 @@ services:
     container_name: front-end
     environment:
       - REACT_APP_NASA_API_TOKEN=${REACT_APP_NASA_API_TOKEN}
-      - REACT_APP_DBURL=http://back-end:3001
+      - REACT_APP_BACKEND_URL=http://back-end:3001
     healthcheck:
       test: ["CMD", "curl", "http://front-end:3000"]
       interval: 10s
@@ -84,7 +84,7 @@ services:
     #Uncomment the following line to build the image from the Dockerfile in the tests directory
     #build: ./Portfolio-2023-RF-Tests
     volumes:
-      - ./Portfolio-2023-RF-Tests:/app/tests
+      - ./Portfolio-2023-RF-Tests/Portfolio-2023-RPA-tests:/app
       - ./logs:/app/logs
       - ./Portfolio-2023-RF-Tests/Portfolio-2023-RPA-tests/jsonfiles:/app/jsonfiles
     depends_on:
