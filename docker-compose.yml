@@ -14,8 +14,7 @@ services:
       - ./portfolio-2023/node_modules:/usr/src/app/node_modules
     container_name: front-end
     environment:
-      - REACT_APP_NASA_API_TOKEN=${REACT_APP_NASA_API_TOKEN}
-      - REACT_APP_DBURL=http://back-end:3001
+      - REACT_APP_BACKEND_URL=http://back-end:3001
     healthcheck:
       test: ["CMD", "curl", "http://front-end:3000"]
       interval: 10s
@@ -44,6 +43,7 @@ services:
       - DB_RANDOM_TABLE_NAME_JSON_FILE=${DB_RANDOM_TABLE_NAME_JSON_FILE}
       - FRONT_END_URL=${FRONT_END_URL}
       - PASSWORD_FILE=/run/secrets/password
+      - NASA_API_TOKEN=${NASA_API_TOKEN}
     secrets:
       - password
     depends_on:
@@ -84,7 +84,7 @@ services:
     #Uncomment the following line to build the image from the Dockerfile in the tests directory
     #build: ./Portfolio-2023-RF-Tests
     volumes:
-      - ./Portfolio-2023-RF-Tests:/app/tests
+      - ./Portfolio-2023-RF-Tests/Portfolio-2023-RPA-tests:/app
       - ./logs:/app/logs
       - ./Portfolio-2023-RF-Tests/Portfolio-2023-RPA-tests/jsonfiles:/app/jsonfiles
     depends_on:
