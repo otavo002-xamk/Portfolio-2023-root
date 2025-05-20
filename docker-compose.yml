@@ -3,12 +3,12 @@ version: "3.8"
 services:
   front-end:
     #Uncomment the following line to build the image locally.
-    build:
+    #build:
       context: ./portfolio-2023
       args:
         - REACT_APP_BACKEND_URL=http://back-end:3001
     #Comment the following line if you uncomment the previous line.
-    #image: woudisnakes/portfolio-2023-front-prod:latest
+    image: woudisnakes/portfolio-2023-front-prod:latest
     ports:
       - 80:80
     container_name: front-end
@@ -94,7 +94,7 @@ services:
     env_file: .env
     environment:
       - BROWSER=headlessfirefox
-      - HOST=http://front-end:3000
+      - HOST=http://front-end:80
       - BROWSER_OPENING=${BROWSER_OPENING}
       - EMPTY_TABLE=${EMPTY_TABLE}
       - FILLED_TABLE=${FILLED_TABLE}
