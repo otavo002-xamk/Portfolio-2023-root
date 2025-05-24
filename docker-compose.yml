@@ -107,7 +107,6 @@ services:
 
 volumes:
   mysql_data:
-  node_modules:
 
 secrets:
   password:
